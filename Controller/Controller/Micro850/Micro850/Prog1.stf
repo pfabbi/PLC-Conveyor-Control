@@ -1,0 +1,117 @@
+PROGRAM Prog1
+#info= QLD
+BOF
+
+
+(**)
+
+SOR  [0,1] (**) (**)  
+ BST  XIC  [1,0] (*BOOL_IN_3*) (*Start_PB*)
+   NXB  
+ BST  XIC  [1,1] (*BOOL_OUT_0*) (*1st_Conveyor*)
+   NXB  XIC  [1,2] (*TON_1.Q*) (*Q*)
+ BND
+
+ BND
+  XIC  [2,0] (*BOOL_IN_4*) (*Stop_PB*)  
+ BST  XIC  [3,0] (*BOOL_IN_1*) (*Sensor_B*)
+   NXB  XIC  [3,1] (*TON_1.Q*) (*Q*)
+ BND
+  XIC  [4,0] (*BOOL_IN_5*) (*Sensor_C*)  
+ BST  OTE  [5,0] (*BOOL_OUT_0*) (*1st_Conveyor*)
+   NXB  
+ BST  OTE  [5,1] (*BOOL_OUT_4*) (*Green_LED*)
+   NXB  OTE  [5,2] (*BOOL_OUT_2*) (*Start_PB_(Light)*)
+ BND
+
+ BND
+
+EOR [6,0]
+
+
+(**)
+
+SOR  [0,5] (**) (**)  
+ BST  XIC  [1,0] (*BOOL_OUT_0*) (*1st_Conveyor*)
+   NXB  
+ BST  XIC  [1,1] (*BOOL_OUT_1*) (*2nd_Conveyor*)
+   NXB  XIC  [1,2] (*TON_1.Q*) (*Q*)
+ BND
+
+ BND
+  XIC  [2,0] (*BOOL_IN_4*) (*Stop_PB*)  
+ BST  XIC  [3,0] (*BOOL_IN_1*) (*Sensor_B*)
+   NXB  XIC  [3,1] (*TON_1.Q*) (*Q*)
+ BND
+  XIC  [4,0] (*BOOL_IN_5*) (*Sensor_C*)  OTE  [5,0] (*BOOL_OUT_1*) (*2nd_Conveyor*)
+EOR [6,0]
+
+
+(**)
+
+SOR  [0,9] (**) (**)  
+ BST  XIC  [1,0] (*BOOL_OUT_1*) (*2nd_Conveyor*)
+   NXB  
+ BST  XIC  [1,1] (*BOOL_OUT_8*) (*3rd_conveyor*)
+   NXB  XIC  [1,2] (*TON_1.Q*) (*Q*)
+ BND
+
+ BND
+  XIC  [2,0] (*BOOL_IN_4*) (*Stop_PB*)  
+ BST  XIC  [3,0] (*BOOL_IN_1*) (*Sensor_B*)
+   NXB  XIC  [3,1] (*TON_1.Q*) (*Q*)
+ BND
+  XIC  [4,0] (*BOOL_IN_5*) (*Sensor_C*)  OTE  [5,0] (*BOOL_OUT_8*) (*3rd_conveyor*)
+EOR [6,0]
+
+
+(**)
+
+SOR  [0,13] (**) (**)  XIO  [1,0] (*BOOL_IN_0*) (*Sensor_A*)  OTE  [2,0] (*BOOL_OUT_6*) (*Sensor_A_Light*)
+EOR [3,0]
+
+
+(**)
+
+SOR  [0,15] (**) (**)  
+ BST  XIO  [1,0] (*BOOL_IN_1*) (*Sensor_B*)
+   NXB  XIC  [1,1] (*TON_1.Redge*) (*Redg*)  XIO  [2,1] (*TON_1.Q*) (*Q*)
+ BND
+  
+ BST  OTE  [3,0] (*BOOL_OUT_7*) (*Sensor_B_Light*)
+   NXB  FB  [3,1] (*TON*) (*TON_1*) ( (*IN:IN*)(**) (**)  , (*PT:PT*)(*T#15s*) (**) ; (*Q:Q*)(**) (**)  , (*ET:ET*)(**) (**) )
+ BND
+
+EOR [6,0]
+
+
+(**)
+
+SOR  [0,19] (**) (**)  FB  [1,0] (*ANY_TO_LREAL*) (*1*) ( (*EN:EN*)(**) (**)  , (*i1:*)(*TON_1.ET*) (**) ; (*ENO:ENO*)(**) (**)  , (*o1:*)(*Time_In_LREAL*) (**) )  FB  [4,0] (***) (*2*) ( (*EN:EN*)(**) (**)  , (*i1:*)(*Time_In_LREAL*) (**)  , (*i2:*)(*0.001*) (**) ; (*ENO:ENO*)(**) (**)  , (*o1:*)(*Time_Mulitplied*) (**) )  FB  [7,0] (*ANY_TO_INT*) (*3*) ( (*EN:EN*)(**) (**)  , (*i1:*)(*Time_Mulitplied*) (**) ; (*ENO:ENO*)(**) (**)  , (*o1:*)(*Time_In_Integer*) (**) )  FB  [10,0] (*1 gain*) (*4*) ( (*EN:EN*)(**) (**)  , (*i1:*)(*Time_In_Integer*) (**) ; (*ENO:ENO*)(**) (**)  , (*o1:*)(*INT_OUT_0*) (**) )
+EOR [13,0]
+
+
+(**)
+
+SOR  [0,23] (**) (**)  XIO  [1,0] (*BOOL_IN_5*) (*Sensor_C*)  OTE  [2,0] (*BOOL_OUT_9*) (*Process_Complete*)
+EOR [3,0]
+
+
+(**)
+
+SOR  [0,25] (**) (**)  XIO  [1,0] (*BOOL_IN_4*) (*Stop_PB*)  
+ BST  OTE  [2,0] (*BOOL_OUT_5*) (*Red_LED*)
+   NXB  
+ BST  OTE  [2,1] (*BOOL_OUT_3*) (*Stop_PB_(Light)*)
+   NXB  FB  [2,2] (*1 gain*) (*6*) ( (*EN:EN*)(**) (**)  , (*i1:*)(*Time_In_Integer*) (**) ; (*ENO:ENO*)(**) (**)  , (*o1:*)(*INT_OUT_0*) (**) )
+ BND
+
+ BND
+
+EOR [5,0]
+EOF
+#end_info
+#info= ID_MAX
+NextId=6
+#end_info
+END_PROGRAM
