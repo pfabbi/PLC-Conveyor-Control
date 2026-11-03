@@ -1,5 +1,3 @@
-## 3D Simulation
-<img width="1915" height="953" alt="Simulation_Overview" src="https://github.com/user-attachments/assets/06222389-8d02-4af0-b3ea-8677f5420167" /> 
 # PLC Conveyor Belt Control & Timer Display System
 
 An integrated industrial automation cell combining virtual plant commissioning, Allen-Bradley Micro850 PLC ladder logic, and an Ignition Vision HMI. The system tracks item progression along a conveyor line, times processing cycles, and provides real-time operator control and live status feedback.
